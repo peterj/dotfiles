@@ -31,6 +31,9 @@ brew install node
 - [GitHub Desktop](https://central.github.com/mac/latest)
 - [Chrome](https://www.google.com/chrome/browser/desktop/index.html)
 - [Flux](https://justgetflux.com/)
+- [Alfred](https://www.alfredapp.com/)
+- [VS Code](https://code.visualstudio.com/Download)
+- [Docker toolbox](https://www.docker.com/toolbox)
 
 ## Git
 - make git logs pretty (git lg):
