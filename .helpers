@@ -1,0 +1,55 @@
+# vhosts
+alias hosts='sudo vim /etc/hosts'
+alias vhosts='sudo vim /etc/apache2/extra/httpd-vhosts.conf'
+
+#copy working directory
+alias cwd='pwd | tr -d "\r\n" | pbcopy'
+
+# copy file interactive
+alias cp='cp -i'
+
+# move file interactive
+alias mv='mv -i'
+
+# untar
+alias untar='tar xvf'
+
+# Call from a local repo to open the repository on github/bitbucket in browser
+function repo() {
+    local giturl=$(git config --get remote.origin.url | sed 's/git@/\/\//g' | sed 's/.git$//' | sed 's/https://g' | sed 's/:/\//g')
+    if [[ $giturl == "" ]]; then
+        echo "Not a git repository or no remote.origin.url is set."
+    else
+        local gitbranch=$(git rev-parse --abbrev-ref HEAD)
+        local giturl="http:${giturl}"
+
+        if [[ $gitbranch != "master" ]]; then
+            local giturl="${giturl}/tree/${gitbranch}"
+        fi
+
+        echo $giturl
+        open $giturl
+    fi
+}
+
+# Query Wikipedia via console over DNS
+mwiki() { dig +short txt "$*".wp.dg.cx; }
+
+# Get colors in manual pages
+man() {
+    env \
+    LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+    LESS_TERMCAP_md=$(printf "\e[1;31m") \
+    LESS_TERMCAP_me=$(printf "\e[0m") \
+    LESS_TERMCAP_se=$(printf "\e[0m") \
+    LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+    LESS_TERMCAP_ue=$(printf "\e[0m") \
+    LESS_TERMCAP_us=$(printf "\e[1;32m") \
+    man "$@"
+}
+
+# Pipe my public key to my clipboard.
+alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+
+# Pipe my private key to my clipboard.
+alias prikey="more ~/.ssh/id_rsa | pbcopy | echo '=> Private key copied to pasteboard.'"
