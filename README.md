@@ -34,6 +34,8 @@ brew install node
 - [Alfred](https://www.alfredapp.com/)
 - [VS Code](https://code.visualstudio.com/Download)
 - [Docker toolbox](https://www.docker.com/toolbox)
+- [Evernote] (https://evernote.com/download/)
+- [GifGrabber] (http://www.gifgrabber.com/)
 
 ## Git
 - make git logs pretty (git lg):
