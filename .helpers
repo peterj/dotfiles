@@ -32,9 +32,6 @@ function repo() {
     fi
 }
 
-# Query Wikipedia via console over DNS
-mwiki() { dig +short txt "$*".wp.dg.cx; }
-
 # Get colors in manual pages
 man() {
     env \
