@@ -58,4 +58,7 @@ curl -O https://raw.githubusercontent.com/pj3677/dotfiles/master/.bash_prompt
 curl -O https://raw.githubusercontent.com/pj3677/dotfiles/master/.exports
 curl -O https://raw.githubusercontent.com/pj3677/dotfiles/master/.functions
 curl -O https://raw.githubusercontent.com/pj3677/dotfiles/master/.inputrc
+curl -O https://raw.githubusercontent.com/pj3677/dotfiles/master/.dockerfunc
 ```
+## TODOs
+- add an installer to automatically copy the files to ~/
