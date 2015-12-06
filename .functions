@@ -1,3 +1,9 @@
+function createCerts() {
+  openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
+  openssl pkcs12 -export -out mycert.pfx -in mycert.pem -name "My Certificate"
+  openssl x509 -inform pem -in mycert.pem -outform der -out mycert.cer
+}
+
 # Lock the screen
 function lock() {
 /System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend
