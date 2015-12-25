@@ -1,0 +1,67 @@
+# Runs azure login if CLI is not initialized.
+function initazure() {
+    if [ ! -f ~/.azure/azureProfile.json ]; then
+        azure login
+    fi
+}
+
+# Gets the current and enabled Azure subscription id.
+function azuresub() {
+    azure account list | grep true | grep Enabled | grep -o -E "[a-f0-9-]{8}([a-f0-9-]{4}){3}[a-f0-9-]{12}"
+}
+
+function deletegroup() {
+    azure group delete -n $1 -q
+}
+
+function creategroup() {
+    location=$2
+    if [ -z "$location" ]; then 
+        location="westus"
+    fi
+
+    azure group create -n $1 -l $location
+}
+
+function listgroups() {
+    azure group list | grep Succeeded | awk '{ print $2 }'
+}
+
+function createvm() {
+    name=$1
+    password=$2
+    resgroup=""
+    username="azurevm"
+    location="westus"
+    ostype="Linux"
+    image="canonical:UbuntuServer:15.10:15.10.201512190"
+    
+    if [ -z "$password" ]; then
+        echo Please provide password.
+    else
+        if [ -z "$name" ]; then
+            rand=$(randomstr)
+            resgroup="RG_"$(rand)
+            creategroup $resgroup
+            name="VM_"$(rand)
+        else
+            resgroup="RG_"$name
+            if [ -z "$(azure group list | grep $resgroup)" ]; then
+                echo Group $resgroup does not exist. Creating one...
+                creategroup $resgroup
+            fi
+        fi
+
+        echo Resource group: $resgroup
+        azure vm quick-create -g $resgroup -n $name -l $location -y $ostype -Q $image -u $username -p $password
+    fi
+}
+
+function randomstr() {
+    length=$1
+    if [ -z "$length" ]; then
+        length=5
+    fi
+    LC_ALL=C; 
+    cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w $length | head -n 1
+}
