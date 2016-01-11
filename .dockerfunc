@@ -18,6 +18,10 @@ function bashin() {
    d exec -it $@ /bin/bash
 }
 
+function dlogs() {
+   d logs $@
+}
+
 # ** docker-machine **
 
 # Inits default docker host.
