@@ -1,0 +1,4 @@
+export GOPATH=~/projects/go
+export GOBIN=$GOPATH/bin
+
+export PATH=/usr/local/bin:/usr/local/go/bin:$PATH:$GOPATH/bin:/sbin

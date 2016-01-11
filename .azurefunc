@@ -1,3 +1,12 @@
+
+function liststorage() {
+    azure storage blob list share
+}
+
+function uploadfile() {
+    azure storage blob upload $1 share $1
+}
+
 # Runs azure login if CLI is not initialized.
 function initazure() {
     if [ ! -f ~/.azure/azureProfile.json ]; then
@@ -16,7 +25,7 @@ function deletegroup() {
 
 function creategroup() {
     location=$2
-    if [ -z "$location" ]; then 
+    if [ -z "$location" ]; then
         location="westus"
     fi
 
@@ -35,7 +44,7 @@ function createvm() {
     location="westus"
     ostype="Linux"
     image="canonical:UbuntuServer:15.10:15.10.201512190"
-    
+
     if [ -z "$password" ]; then
         echo Please provide password.
     else
@@ -62,6 +71,6 @@ function randomstr() {
     if [ -z "$length" ]; then
         length=5
     fi
-    LC_ALL=C; 
+    LC_ALL=C;
     cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w $length | head -n 1
 }
