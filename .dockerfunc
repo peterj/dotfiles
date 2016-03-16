@@ -24,9 +24,10 @@ function dlogs() {
 
 # ** docker-machine **
 
-# Inits default docker host.
+# Inits docker host.
 function dinit() {
-    _initDockerMachine "default"
+    echo "Initializing ${1:-default}"
+    _initDockerMachine ${1:-default}
 }
 
 # Starts docker machine and sets env settings.
