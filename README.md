@@ -37,6 +37,8 @@ brew install node
 - [Evernote] (https://evernote.com/download/)
 - [GifGrabber] (http://www.gifgrabber.com/)
 - [DiffMerge] (http://www.sourcegear.com/diffmerge/downloads.php)
+- [RoboMongo] (https://robomongo.org/download)
+- [Postman] (https://www.getpostman.com/)
 
 ## Git
 - make git logs pretty (git lg):
