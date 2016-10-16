@@ -1,7 +1,7 @@
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{bash_prompt,aliases,functions,helpers,path,extra,exports,dockerfunc,azurefunc}; do
+for file in ~/.{bash_prompt,aliases,functions,helpers,path,extra,exports,dockerfunc,azurefunc,misc}; do
     [[ -r "$file" ]] && [[ -f "$file" ]] && source "$file"
 done
 unset file
