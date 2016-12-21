@@ -24,6 +24,7 @@ brew install bash-completion
 brew install grc
 brew install git
 brew install node
+brew install python
 ```
 
 ## Apps to install
