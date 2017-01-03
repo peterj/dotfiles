@@ -19,7 +19,7 @@ alias g="git"
 alias h="history"
 alias j="jobs"
 
-alias k ="kubectl"
+alias k="kubectl"
 
 # `cat` with beautiful colors. requires Pygments installed.
 # sudo easy_install -U Pygments
