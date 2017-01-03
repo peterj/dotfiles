@@ -20,7 +20,6 @@ alias h="history"
 alias j="jobs"
 
 alias k ="kubectl"
-alias kbash="k run curl --image=radial/busyboxplus:curl -i --tty"
 
 # `cat` with beautiful colors. requires Pygments installed.
 # sudo easy_install -U Pygments
