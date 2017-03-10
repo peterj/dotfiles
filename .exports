@@ -24,3 +24,7 @@ export MANPAGER='less -X';
 
 # Always enable colored `grep` output.
 export GREP_OPTIONS='--color=auto';
+
+# Prevent CTRL+D from closing the shell 
+# ... or press it 50 times to close it
+export IGNOREEOF=50
