@@ -40,6 +40,7 @@ brew install python
 - [DiffMerge] (http://www.sourcegear.com/diffmerge/downloads.php)
 - [RoboMongo] (https://robomongo.org/download)
 - [Postman] (https://www.getpostman.com/)
+- [Ccat] (https://github.com/jingweno/ccat)
 
 ## Git
 - make git logs pretty (git lg):
