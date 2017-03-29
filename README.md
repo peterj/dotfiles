@@ -25,6 +25,7 @@ brew install grc
 brew install git
 brew install node
 brew install python
+brew install ccat
 ```
 
 ## Apps to install

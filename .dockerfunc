@@ -1,5 +1,4 @@
 alias d="docker"
-alias dm="docker-machine"
 
 # Deletes all images and all containers.
 function dclean() {
@@ -20,18 +19,4 @@ function bashin() {
 
 function dlogs() {
    d logs $@
-}
-
-# ** docker-machine **
-
-# Inits docker host.
-function dinit() {
-    echo "Initializing ${1:-default}"
-    _initDockerMachine ${1:-default}
-}
-
-# Starts docker machine and sets env settings.
-function _initDockerMachine() {
-    dm start $@ > /dev/null 2>&1
-    eval $(dm env $@)
 }

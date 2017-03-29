@@ -10,6 +10,10 @@ alias -- -="cd -"
 alias cp='cp -iv'
 alias mv='mv -iv'
 
+if [[ $(which ccat) ]]; then
+    alias cat='ccat'
+fi
+
 # open current folder in Finder 
 alias f='open -a Finder ./'
 
