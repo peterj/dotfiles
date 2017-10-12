@@ -54,4 +54,7 @@ if [[ -f "`brew --prefix grc`/etc/grc.bashrc" ]]; then
     source "`brew --prefix grc`/etc/grc.bashrc"
 fi
 
+# Add git_completion. (get the file from https://github.com/git/git/tree/master/contrib/completion)
+[[ -f "$HOME/git_completion.bash" ]] && source "$HOME/git_completion.bash"
+
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
