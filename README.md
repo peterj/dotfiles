@@ -42,6 +42,7 @@ brew install ccat
 - [RoboMongo] (https://robomongo.org/download)
 - [Postman] (https://www.getpostman.com/)
 - [Ccat] (https://github.com/jingweno/ccat)
+- [Day-O] (https://shauninman.com/archive/2016/10/20/day_o_2_mac_menu_bar_clock)
 
 ## Git
 - make git logs pretty (git lg):

@@ -4,6 +4,12 @@ function createCerts() {
   openssl x509 -inform pem -in mycert.pem -outform der -out mycert.cer
 }
 
+# Kills the process that's locking up a specific port
+function killport() {
+    echo Killing processes that use port $@
+    kill $(lsof -ti tcp:$@)
+}
+
 # Lock the screen
 function lock() {
 /System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend
