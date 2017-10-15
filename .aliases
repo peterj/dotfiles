@@ -17,6 +17,9 @@ fi
 # open current folder in Finder 
 alias f='open -a Finder ./'
 
+# show all executable paths 
+alias path='echo -e ${PATH//:/\\n}'
+
 # Shortcuts
 alias p="cd ~/projects"
 alias g="git"
@@ -24,6 +27,7 @@ alias h="history"
 alias j="jobs"
 
 alias k="kubectl"
+alias i="istioctl"
 
 # `cat` with beautiful colors. requires Pygments installed.
 # sudo easy_install -U Pygments
