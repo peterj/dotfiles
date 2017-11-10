@@ -26,6 +26,7 @@ brew install git
 brew install node
 brew install python
 brew install ccat
+brew install kubectx
 ```
 
 ## Apps to install
