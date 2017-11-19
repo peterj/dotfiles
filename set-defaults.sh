@@ -1,3 +1,10 @@
+#!/bin/bash
+# Sets the OS X defaults.
+# Sources:
+# - https://github.com/skwp/dotfiles/blob/master/bin/osx
+#  - https://github.com/mathiasbynens/dotfiles/blob/master/.osx
+
+
 ###############################################################################
 # Activity Monitor                                                            #
 ###############################################################################
@@ -68,3 +75,26 @@ defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 
 # Disable the crash reporter
 defaults write com.apple.CrashReporter DialogType -string "none"
+
+###############################################################################
+# Interfaces: trackpad, mouse, keyboard, bluetooth, etc.
+###############################################################################
+
+# Set a really fast keyboard repeat rate.
+defaults write -g KeyRepeat -int 0
+
+# Disable press-and-hold for keys in favor of key repeat.
+defaults write -g ApplePressAndHoldEnabled -bool false
+
+#  Automatically hide and show the Dock
+defaults write com.apple.dock autohide -bool true
+
+###############################################################################
+# Do some clean up work.
+###############################################################################
+
+for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
+           "Dock" "Finder" "Mail" "Messages" "Safari" "SystemUIServer" \
+           "Terminal" "Twitter" "iCal"; do
+           kill all "${app}" > /dev/null 2>&1
+done

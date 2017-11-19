@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function createCerts() {
   openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
   openssl pkcs12 -export -out mycert.pfx -in mycert.pem -name "My Certificate"
@@ -12,18 +14,7 @@ function killport() {
 
 # Lock the screen
 function lock() {
-/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend
-}
-
-mocha() {
-  if type whence &> /dev/null; then
-    mocha=$(whence -p mocha)
-  else
-    mocha=$(type -P mocha)
-  fi
-  substitution='s/\x1b\[90m/\x1b[92m/g'
-
-  $mocha -c "$@" > >(perl -pe "$substitution") 2> >(perl -pe "$substitution" 1>&2)
+    /System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend
 }
 
 # Create a new directory and enter it
@@ -105,4 +96,9 @@ function maxfd() {
 function explain() {
     cmd=$@
     open "http://explainshell.com/explain?cmd=${cmd}"
+}
+
+# find shorthand
+function f() {
+  find . -name "$1" 2>&1 | grep -v 'Permission denied'
 }
