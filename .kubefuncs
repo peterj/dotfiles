@@ -11,3 +11,8 @@ function kbash() {
         kubectl attach ${podname} -c curl -i -t
     fi
 }
+
+function kdash() {
+    kubectl proxy &
+    open http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+}
