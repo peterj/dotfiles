@@ -26,4 +26,21 @@ function kproxy() {
 function podip {
     echo "Getting IP for '$1'"
     kubectl describe pod $1 | grep IP | awk '{print $2}'
+# Attach to running pod
+function ka() {
+    kubectl attach $1 -i
+}
+
+# Forwards local port to pods container port
+function kf() {
+    if [ -z "$1" ]; then
+        kubectl get pods -o name
+    else
+        containerPort=$(kubectl get po $1 -o jsonpath='{.spec.containers[0].ports[0].containerPort}')
+        if [ -z "$containerPort" ]; then
+            echo "No container port"
+        else
+            kubectl port-forward $1 8080:$containerPort
+        fi
+    fi
 }

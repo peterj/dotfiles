@@ -28,6 +28,7 @@ alias j="jobs"
 
 alias k="kubectl"
 alias i="istioctl"
+alias d="docker"
 
 # `cat` with beautiful colors. requires Pygments installed.
 # sudo easy_install -U Pygments
