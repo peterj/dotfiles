@@ -14,10 +14,10 @@ if [[ $(which ccat) ]]; then
     alias cat='ccat'
 fi
 
-# open current folder in Finder 
+# open current folder in Finder
 alias f='open -a Finder ./'
 
-# show all executable paths 
+# show all executable paths
 alias path='echo -e ${PATH//:/\\n}'
 
 # Shortcuts
@@ -32,9 +32,6 @@ alias i="istioctl"
 # `cat` with beautiful colors. requires Pygments installed.
 # sudo easy_install -U Pygments
 alias c='pygmentize -O style=monokai -f console256 -g'
-
-# Apps
-alias code="open -a Visual\ Studio\ Code"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
