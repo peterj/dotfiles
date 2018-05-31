@@ -45,6 +45,15 @@ man() {
     man "$@"
 }
 
+# Runs a provided command for N repeats
+function loop() {
+    number=$1
+    shift
+    for n in $(seq $number); do
+      $@
+    done
+}
+
 # Pipe my public key to my clipboard.
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
 
