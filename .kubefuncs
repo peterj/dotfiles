@@ -26,6 +26,8 @@ function kproxy() {
 function podip {
     echo "Getting IP for '$1'"
     kubectl describe pod $1 | grep IP | awk '{print $2}'
+}
+
 # Attach to running pod
 function ka() {
     kubectl attach $1 -i
