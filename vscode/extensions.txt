@@ -1,0 +1,14 @@
+CoenraadS.bracket-pair-colorizer
+PeterJausovec.vscode-docker
+aaron-bond.better-comments
+eamodio.gitlens
+eg2.tslint
+esbenp.prettier-vscode
+ilevine.squash
+ms-python.python
+ms-vscode.Go
+redhat.java
+vscjava.vscode-java-debug
+vscjava.vscode-java-pack
+vscjava.vscode-java-test
+vscjava.vscode-maven
