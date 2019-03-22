@@ -1,6 +1,6 @@
 [alias]
 
- l = log --pretty=oneline -n 20 --graph --abbrev-commit                                                                                                                                                  [140/590]
+    l = log --pretty=oneline -n 20 --graph --abbrev-commit                                                                                                                                                  [140/590]
 
     # View the current working tree status using the short format
     s = status -s
