@@ -1,7 +1,6 @@
 [alias]
 
-    # View abbreviated SHA, description, and history graph of the latest 20 commits
-    l = log --pretty=oneline -n 20 --graph --abbrev-commit
+ l = log --pretty=oneline -n 20 --graph --abbrev-commit                                                                                                                                                  [140/590]
 
     # View the current working tree status using the short format
     s = status -s
@@ -15,6 +14,11 @@
     # Pull in remote changes for the current repository and all its submodules
     p = !"git pull; git submodule foreach git pull origin master"
 
+    # Merges upstream master into local (origin) fork
+    fu = !"git fetch upstream; git checkout master; git merge upstream/master"
+
+    # Makes the fork even with upstream master, discarding all local changes
+    fuf = !"git fetch upstream; git checkout master; git reset --hard upstream/master; git push origin master --force"
     # Clone a repository including all submodules
     c = clone --recursive
 
@@ -71,6 +75,8 @@
             git commit --amend -m \"$(git log -1 --pretty=%B)\n\nCloses #$1.\"; \
         fi \
     }; f"
+    
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
 [apply]
 
