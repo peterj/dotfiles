@@ -1,5 +1,16 @@
 #!/bin/bash
 
+function qr() {
+	file=/tmp/$RANDOM-qr.png
+	if [ -z "$1" ]; then
+		echo "provide url, text for the qr code"
+	else
+	  echo "creating: $file"
+      qrencode -o $file $1
+	  open $file
+	fi
+}
+
 function createCerts() {
   openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
   openssl pkcs12 -export -out mycert.pfx -in mycert.pem -name "My Certificate"

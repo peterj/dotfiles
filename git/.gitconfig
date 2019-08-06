@@ -15,6 +15,11 @@
     # Pull in remote changes for the current repository and all its submodules
     p = !"git pull; git submodule foreach git pull origin master"
 
+    # Merges upstream master into local (origin) fork
+    fu = !"git fetch upstream; git checkout master; git merge upstream/master"
+
+    # Makes the fork even with upstream master, discarding all local changes
+    fuf = !"git fetch upstream; git checkout master; git reset --hard upstream/master; git push origin master --force"
     # Clone a repository including all submodules
     c = clone --recursive
 
@@ -71,6 +76,7 @@
             git commit --amend -m \"$(git log -1 --pretty=%B)\n\nCloses #$1.\"; \
         fi \
     }; f"
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
 [apply]
 
@@ -80,7 +86,7 @@
 [core]
 
     # Use custom `.gitignore` and `.gitattributes`
-    excludesfile = ~/.gitignore
+	excludesfile = ~/.gitignore
     attributesfile = ~/.gitattributes
 
     # Treat spaces before tabs and all kinds of trailing whitespace as an error
@@ -177,6 +183,12 @@
     pushInsteadOf = "gist:"
     pushInsteadOf = "git://gist.github.com/"
 
-[url "git://gist.github.com/"]
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
 
+[url "git://gist.github.com/"]
     insteadOf = "gist:"
