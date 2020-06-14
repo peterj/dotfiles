@@ -12,6 +12,7 @@ done
 
 ln -sfv $DIR/git/.gitconfig $HOME/.gitconfig
 ln -sfv $DIR/git/.git-completion.bash $HOME/.git-completion.bash
+ln -sfv $DIR/.hammerspoon/init.lua $HOME/.hammerspoon/init.lua
 
 # Set macos defaults
 chmod a+x $DIR/set-defaults.sh && $DIR/set-defaults.sh

@@ -4,7 +4,7 @@ function kbash() {
 
     if [ $status -ne 0 ]; then
         # Not running, create a new one
-        kubectl run curl --image=radial/busyboxplus:curl -i --tty --generator=run-pod/v1
+        kubectl run curl --image=radial/busyboxplus:curl -i --tty
     else
 		echo 'Attaching...'
 		podname=$(kubectl get pods --selector=run=curl -o jsonpath='{.items[*].metadata.name}')
