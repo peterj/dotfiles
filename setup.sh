@@ -52,6 +52,7 @@ brew tap caskroom/cask
 brew install brew-cask
 brew tap caskroom/versions
 
+brew cask install hammerspoon
 brew cask install --appdir="/Applications" google-chrome
 brew cask install --appdir="/Applications" slack
 brew cask install --appdir="/Applications" iterm2

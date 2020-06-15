@@ -26,3 +26,8 @@ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Crese
 
 ## Vim
 - Install Vim settings from [here](https://github.com/jfrazelle/.vim)
+
+## Hammerspoon
+
+1. Download [Hammerspoon](https://github.com/Hammerspoon/hammerspoon/releases) (or `brew cask install hammerspoon` OR `setup.sh` if it's a clean machine)
+1. Install [SpoonInstall](https://www.hammerspoon.org/Spoons/SpoonInstall.html)
