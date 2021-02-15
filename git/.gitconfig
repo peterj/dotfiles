@@ -1,5 +1,4 @@
 [alias]
-
     l = log --pretty=oneline -n 20 --graph --abbrev-commit                                                                                                                                                  [140/590]
 
     # View the current working tree status using the short format
@@ -12,13 +11,13 @@
     di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
     # Pull in remote changes for the current repository and all its submodules
-    p = !"git pull; git submodule foreach git pull origin master"
+    p = !"git pull; git submodule foreach git pull origin main"
 
-    # Merges upstream master into local (origin) fork
-    fu = !"git fetch upstream; git checkout master; git merge upstream/master"
+    # Merges upstream main into local (origin) fork
+    fu = !"git fetch upstream; git checkout main; git merge upstream/main"
 
-    # Makes the fork even with upstream master, discarding all local changes
-    fuf = !"git fetch upstream; git checkout master; git reset --hard upstream/master; git push origin master --force"
+    # Makes the fork even with upstream main, discarding all local changes
+    fuf = !"git fetch upstream; git checkout main; git reset --hard upstream/main; git push origin main --force"
     # Clone a repository including all submodules
     c = clone --recursive
 
@@ -57,19 +56,19 @@
     # Find commits by commit message
     fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
 
-    # Remove branches that have already been merged with master
+    # Remove branches that have already been merged with main
     # a.k.a. ‘delete merged’
     dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 
     # List contributors with number of commits
     contributors = shortlog --summary --numbered
 
-    # Merge GitHub pull request on top of the `master` branch
+    # Merge GitHub pull request on top of the `main` branch
     mpr = "!f() { \
         if [ $(printf \"%s\" \"$1\" | grep '^[0-9]\\+$' > /dev/null; printf $?) -eq 0 ]; then \
             git fetch origin refs/pull/$1/head:pr/$1 && \
-            git rebase master pr/$1 && \
-            git checkout master && \
+            git rebase main pr/$1 && \
+            git checkout main && \
             git merge pr/$1 && \
             git branch -D pr/$1 && \
             git commit --amend -m \"$(git log -1 --pretty=%B)\n\nCloses #$1.\"; \
@@ -186,8 +185,17 @@
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 
 [url "git://gist.github.com/"]
     insteadOf = "gist:"
+[user]
+	name = Peter Jausovec
+	email = peter.jausovec@gmail.com
+[credential]
+	helper = osxkeychain
+[commit]
+	gpgsign = true
+[init]
+	defaultBranch = main
