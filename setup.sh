@@ -12,13 +12,15 @@ done
 
 ln -sfv $DIR/git/.gitconfig $HOME/.gitconfig
 ln -sfv $DIR/git/.git-completion.bash $HOME/.git-completion.bash
-ln -sfv $DIR/.hammerspoon/init.lua $HOME/.hammerspoon/init.lua
+if [[ $OSTYPE == 'darwin'* ]]; then
+  ln -sfv $DIR/.hammerspoon/init.lua $HOME/.hammerspoon/init.lua
+  # Set macos defaults
+  chmod a+x $DIR/set-defaults.sh && $DIR/set-defaults.sh
+fi
 
-# Set macos defaults
-chmod a+x $DIR/set-defaults.sh && $DIR/set-defaults.sh
 
 # Install homebrew
-chmod a+x $DIR/homebrew/install.sh && $DIR/homebrew/install.sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # ---------- START BREW --------
 brew update
@@ -52,12 +54,14 @@ brew tap caskroom/cask
 brew install brew-cask
 brew tap caskroom/versions
 
-brew cask install hammerspoon
-brew cask install --appdir="/Applications" google-chrome
-brew cask install --appdir="/Applications" slack
-brew cask install --appdir="/Applications" iterm2
-brew cask install --appdir="/Applications" visual-studio-code
-brew cask install minikube
+if [[ $OSTYPE == 'darwin'* ]]; then
+  brew cask install hammerspoon
+  brew cask install --appdir="/Applications" google-chrome
+  brew cask install --appdir="/Applications" slack
+  brew cask install --appdir="/Applications" iterm2
+  brew cask install --appdir="/Applications" visual-studio-code
+  brew cask install minikube
+fi
 
 brew cleanup
 # ---------- END BREW --------
