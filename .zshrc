@@ -76,7 +76,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker)
+plugins=(git docker zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -128,3 +128,5 @@ eval "$(direnv hook $SHELL)"
 
 export PATH=/Users/peterj/.krew/bin:/opt/homebrew/opt/ruby/bin:/opt/homebrew/opt/node@16/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/go/bin:/Users/peterj/projects/google-cloud-sdk/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/lib/ruby/gems/3.1.0/bin:/usr/local/go/bin:/usr/local/MacGPG2/bin:/opt/homebrew/opt/ruby/bin:/opt/homebrew/opt/node@16/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/peterj/projects/google-cloud-sdk/bin:/Users/peterj/.cargo/bin:/Users/peterj/projects/go/bin
 export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(starship init zsh)"

@@ -30,6 +30,14 @@ done
 # Set macos defaults
 chmod a+x $DIR/set-defaults.sh && $DIR/set-defaults.sh
 
+# Clone the zsh plugins
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+# Install starship
+curl -sS https://starship.rs/install.sh | sh
+cp $DIR/starship.toml $HOME/.config/starship.toml
+
 # Install homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
@@ -71,6 +79,9 @@ brew install --appdir="/Applications" slack
 brew install --appdir="/Applications" iterm2
 brew install --appdir="/Applications" visual-studio-code
 brew install minikube
+
+brew install fzf
+$(brew --prefix)/opt/fzf/install
 
 brew cleanup
 # ---------- END BREW --------
