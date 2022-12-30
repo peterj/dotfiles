@@ -12,7 +12,11 @@ done
 
 ln -sfv $DIR/git/.gitconfig $HOME/.gitconfig
 ln -sfv $DIR/git/.git-completion.bash $HOME/.git-completion.bash
-ln -sfv $DIR/.hammerspoon/init.lua $HOME/.hammerspoon/init.lua
+if [[ $OSTYPE == 'darwin'* ]]; then
+  ln -sfv $DIR/.hammerspoon/init.lua $HOME/.hammerspoon/init.lua
+  # Set macos defaults
+  chmod a+x $DIR/set-defaults.sh && $DIR/set-defaults.sh
+fi
 
 # Link the files in /bin folder
 for file in $(ls -p $DIR/bin | grep -v /)
@@ -27,7 +31,7 @@ done
 chmod a+x $DIR/set-defaults.sh && $DIR/set-defaults.sh
 
 # Install homebrew
-chmod a+x $DIR/homebrew/install.sh && $DIR/homebrew/install.sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # ---------- START BREW --------
 brew update
