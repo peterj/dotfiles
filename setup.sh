@@ -14,6 +14,15 @@ ln -sfv $DIR/git/.gitconfig $HOME/.gitconfig
 ln -sfv $DIR/git/.git-completion.bash $HOME/.git-completion.bash
 ln -sfv $DIR/.hammerspoon/init.lua $HOME/.hammerspoon/init.lua
 
+# Link the files in /bin folder
+for file in $(ls -p $DIR/bin | grep -v /)
+do
+    if [ -f "$DIR/bin/$file" ]; then
+        echo "Linking bin $file"
+        sudo ln -sfv $DIR/bin/$file /usr/local/bin/$file
+    fi
+done
+
 # Set macos defaults
 chmod a+x $DIR/set-defaults.sh && $DIR/set-defaults.sh
 
@@ -52,12 +61,12 @@ brew tap caskroom/cask
 brew install brew-cask
 brew tap caskroom/versions
 
-brew cask install hammerspoon
-brew cask install --appdir="/Applications" google-chrome
-brew cask install --appdir="/Applications" slack
-brew cask install --appdir="/Applications" iterm2
-brew cask install --appdir="/Applications" visual-studio-code
-brew cask install minikube
+brew install hammerspoon
+brew install --appdir="/Applications" google-chrome
+brew install --appdir="/Applications" slack
+brew install --appdir="/Applications" iterm2
+brew install --appdir="/Applications" visual-studio-code
+brew install minikube
 
 brew cleanup
 # ---------- END BREW --------

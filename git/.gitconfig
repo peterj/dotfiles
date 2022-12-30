@@ -84,7 +84,7 @@
 [core]
 
     # Use custom `.gitignore` and `.gitattributes`
-	excludesfile = ~/.gitignore
+	excludesfile = /Users/peterj/.gitignore
     attributesfile = ~/.gitattributes
 
     # Treat spaces before tabs and all kinds of trailing whitespace as an error
@@ -185,7 +185,7 @@
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 
 [url "git://gist.github.com/"]
@@ -194,8 +194,20 @@
 	name = Peter Jausovec
 	email = peter.jausovec@gmail.com
 [credential]
-	helper = osxkeychain
+	helper = store
 [commit]
 	gpgsign = true
 [init]
 	defaultBranch = main
+[gpg]
+	program = /usr/local/bin/gpg
+[pull]
+	rebase = false
+
+
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
