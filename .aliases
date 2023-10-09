@@ -22,7 +22,7 @@ alias g="git"
 alias h="history"
 alias j="jobs"
 
-alias k="kubectl"
+alias k="nocorrect kubectl"
 alias i="istioctl"
 alias d="docker"
 
@@ -43,7 +43,7 @@ else # OS X `ls`
 fi
 
 # List all files colorized in long format, including dot files
-alias ls="gls -laFh ${colorflag} --group-directories-first"
+alias ls="gls -laFh ${colorflag}"
 alias dir="ls"
 
 # List only directories

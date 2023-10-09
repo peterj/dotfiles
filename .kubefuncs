@@ -3,7 +3,7 @@ function kbash() {
 
     if [ $? -ne 0 ]; then
         # Not running, create a new one
-        kubectl run curl --image=curlimages/curl -i --tty
+        kubectl run curl --image=pj3677/curlimage -i --tty
     else
 		echo 'Attaching...'
 		podname=$(kubectl get pods --selector=run=curl -o jsonpath='{.items[*].metadata.name}')
@@ -44,4 +44,32 @@ function kf() {
             kubectl port-forward $1 8080:$containerPort
         fi
     fi
+}
+
+# Deploys metallb to the current cluster
+function metallb() {
+    # make sure to install  `brew install chipmk/tap/docker-mac-net-connect`
+    helm upgrade --install --namespace metallb-system --create-namespace --repo https://metallb.github.io/metallb metallb metallb
+    kubectl wait po -n metallb-system --timeout=600s -l app.kubernetes.io/name=metallb -l app.kubernetes.io/component=controller --for condition=Ready
+
+    KIND_NET_CIDR=$(docker network inspect kind -f '{{(index .IPAM.Config 0).Subnet}}')
+    METALLB_IP_START=$(echo ${KIND_NET_CIDR} | sed "s@0.0/16@255.200@")
+    METALLB_IP_END=$(echo ${KIND_NET_CIDR} | sed "s@0.0/16@255.250@")
+    METALLB_IP_RANGE="${METALLB_IP_START}-${METALLB_IP_END}"
+kubectl apply -f - <<EOF
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: lbpool
+  namespace: metallb-system
+spec:
+  addresses:
+  - ${METALLB_IP_RANGE}
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: l2adv
+  namespace: metallb-system
+EOF
 }

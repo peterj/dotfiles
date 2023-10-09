@@ -1,7 +1,7 @@
 -- Based on: 
 -- https://github.com/zzamboni/dot-hammerspoon/blob/master/init.org#general-variables-and-configuration 
 
-local emoji = require("emoji")
+-- local emoji = require("emoji")
 --   Pomo = require('pomodoro')
 
 -- General configuration 

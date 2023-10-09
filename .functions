@@ -11,6 +11,23 @@ function qr() {
 	fi
 }
 
+# Create a 3 node kind cluster
+function kind3() {
+    cat <<EOF | kind create cluster --name "${CLUSTER_NAME}" --config=-
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+- role: worker
+- role: worker
+EOF
+}
+
+# Deploy a sleep pod
+function sleepdeploy() {
+    kubectl apply -f https://raw.githubusercontent.com/istio/istio/master/samples/sleep/sleep.yaml
+}
+
 function createCerts() {
   openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
   openssl pkcs12 -export -out mycert.pfx -in mycert.pem -name "My Certificate"

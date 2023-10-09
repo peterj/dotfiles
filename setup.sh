@@ -65,7 +65,7 @@ brew install python3
 brew install openssh
 brew install ssh-copy-id
 brew install tmux
-brew install vim --with-override-system-vi
+brew install vim
 brew install yarn
 
 # Cask

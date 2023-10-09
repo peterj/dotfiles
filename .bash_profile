@@ -14,3 +14,4 @@ shopt -s histappend
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+. "$HOME/.cargo/env"
