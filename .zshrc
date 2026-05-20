@@ -1,20 +1,22 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-export GOPATH=$HOME/projects/go
-export GOROOT=/usr/local/go
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
-# export PATH=$PATH:/usr/local/bin:/usr/local/go/bin:$PATH:$GOPATH/bin:/sbin
-
-
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/peterj/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="fino"
+
+DISABLE_CORRECTION="true"
+# fzf stuff
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -58,7 +60,7 @@ ENABLE_CORRECTION="true"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -76,7 +78,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git fzf docker zsh-autosuggestions zsh-syntax-highlighting kubectl)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -107,10 +109,12 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/peterj/projects/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/peterj/projects/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '$HOME/projects/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/projects/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/peterj/projects/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/peterj/projects/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '$HOME/projects/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/projects/google-cloud-sdk/completion.zsh.inc'; fi
+
+source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 
 # Load the dotfiles
 for file in ~/.{aliases,completions,exports,extra,functions,git-completion,helpers,kubefuncs,path}; do
@@ -118,15 +122,45 @@ for file in ~/.{aliases,completions,exports,extra,functions,git-completion,helpe
 done
 unset file
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
 setopt CASE_GLOB
 setopt APPEND_HISTORY
 eval $(/opt/homebrew/bin/brew shellenv)
 export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 
-eval "$(direnv hook $SHELL)"
+# eval "$(direnv hook $SHELL)"
 
-export PATH=/Users/peterj/.krew/bin:/opt/homebrew/opt/ruby/bin:/opt/homebrew/opt/node@16/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/go/bin:/Users/peterj/projects/google-cloud-sdk/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/lib/ruby/gems/3.1.0/bin:/usr/local/go/bin:/usr/local/MacGPG2/bin:/opt/homebrew/opt/ruby/bin:/opt/homebrew/opt/node@16/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/peterj/projects/google-cloud-sdk/bin:/Users/peterj/.cargo/bin:/Users/peterj/projects/go/bin
-export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(starship init zsh)"
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:/opt/local/bin:${GOPATH}/bin:$PATH
+export PATH=$HOME/.krew/bin:/opt/homebrew/opt/ruby/bin:/opt/homebrew/opt/node@16/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/go/bin:$HOME/projects/google-cloud-sdk/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/lib/ruby/gems/3.1.0/bin:/usr/local/go/bin:/usr/local/MacGPG2/bin:/opt/homebrew/opt/ruby/bin:/opt/homebrew/opt/node@16/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/projects/google-cloud-sdk/bin:$HOME/.cargo/bin:$HOME/projects/go/bin:$HOME/.gloo/bin:$PATH
+export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
+
+# GO stuff
+export GOPATH="${HOME}/go"
+# export GOROOT="$(brew --prefix golang)/libexec"
+
+# eksctl
+fpath=($fpath ~/.zsh/completion)
+export PATH=${GOPATH}/bin:$PATH
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
+ulimit -n 1000
+
+export DOCKER_HOST=unix:///var/run/docker.sock
+export DOCKER_SOCKET_MOUNT="-v /var/run/docker.sock.raw:/var/run/docker.sock"
+# pnpm
+export PNPM_HOME="/Users/peterj/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+

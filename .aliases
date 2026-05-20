@@ -18,8 +18,43 @@ alias path='echo -e ${PATH//:/\\n}'
 
 # Shortcuts
 alias p="cd ~/projects"
-alias g="git"
 alias h="history"
+
+# Git wrapper that warns before force-pushing to main/master
+function git() {
+    if [[ "$1" == "push" ]]; then
+        local args=("$@")
+        local has_force=false
+        local target_branch=""
+        for arg in "${args[@]}"; do
+            case "$arg" in
+                -f|--force|--force-with-lease) has_force=true ;;
+            esac
+        done
+        # Detect the target branch: "git push origin main" or "git push origin main --force"
+        # The branch is typically the 3rd positional arg (push <remote> <branch>)
+        local pos=0
+        for arg in "${args[@]}"; do
+            [[ "$arg" == -* ]] && continue
+            pos=$((pos + 1))
+            if [[ $pos -eq 3 ]]; then
+                target_branch="$arg"
+                break
+            fi
+        done
+        if $has_force && [[ "$target_branch" == "main" || "$target_branch" == "master" ]]; then
+            echo -e "\033[1;31m!! WARNING: You are about to force-push to '$target_branch' !!\033[0m"
+            echo -n "Are you sure? (y/N): "
+            read -r confirm
+            if [[ "$confirm" != [yY] ]]; then
+                echo "Aborted."
+                return 1
+            fi
+        fi
+    fi
+    command git "$@"
+}
+alias g="git"
 alias j="jobs"
 
 alias k="nocorrect kubectl"
@@ -108,3 +143,5 @@ alias cleanup_dsstore="find . -name '*.DS_Store' -type f -ls -delete"
 alias cloudshell="gcloud cloud-shell ssh"
 
 alias tmux='direnv exec / tmux'
+
+alias nvim="$HOME/projects/nvim/bin/nvim"
